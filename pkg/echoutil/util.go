@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	SessionStoreKey  = "sessions"
+	SessionStoreKey  = "session"
 	SessionUserIDKey = "userID"
 )
 

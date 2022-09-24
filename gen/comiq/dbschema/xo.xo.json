@@ -1,0 +1,119 @@
+{
+  "schemas": [
+    {
+      "type": "mysql",
+      "name": "comiq_dev",
+      "tables": [
+        {
+          "type": "table",
+          "name": "schema_migrations",
+          "columns": [
+            {
+              "name": "version",
+              "datatype": {
+                "type": "bigint"
+              },
+              "is_primary": true
+            },
+            {
+              "name": "dirty",
+              "datatype": {
+                "type": "tinyint",
+                "prec": 1
+              }
+            }
+          ],
+          "primary_keys": [
+            {
+              "name": "version",
+              "datatype": {
+                "type": "bigint"
+              },
+              "is_primary": true
+            }
+          ],
+          "indexes": [
+            {
+              "name": "schema_migrations_version_pkey",
+              "fields": [
+                {
+                  "name": "version",
+                  "datatype": {
+                    "type": "bigint"
+                  },
+                  "is_primary": true
+                }
+              ],
+              "is_unique": true,
+              "is_primary": true
+            }
+          ],
+          "manual": true
+        },
+        {
+          "type": "table",
+          "name": "users",
+          "columns": [
+            {
+              "name": "id",
+              "datatype": {
+                "type": "varchar",
+                "prec": 32
+              },
+              "is_primary": true
+            },
+            {
+              "name": "password",
+              "datatype": {
+                "type": "varchar",
+                "prec": 255
+              }
+            },
+            {
+              "name": "created_at",
+              "datatype": {
+                "type": "timestamp"
+              },
+              "default": "CURRENT_TIMESTAMP"
+            },
+            {
+              "name": "updated_at",
+              "datatype": {
+                "type": "timestamp"
+              },
+              "default": "CURRENT_TIMESTAMP"
+            }
+          ],
+          "primary_keys": [
+            {
+              "name": "id",
+              "datatype": {
+                "type": "varchar",
+                "prec": 32
+              },
+              "is_primary": true
+            }
+          ],
+          "indexes": [
+            {
+              "name": "users_id_pkey",
+              "fields": [
+                {
+                  "name": "id",
+                  "datatype": {
+                    "type": "varchar",
+                    "prec": 32
+                  },
+                  "is_primary": true
+                }
+              ],
+              "is_unique": true,
+              "is_primary": true
+            }
+          ],
+          "manual": true
+        }
+      ]
+    }
+  ]
+}

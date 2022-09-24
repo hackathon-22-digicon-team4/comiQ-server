@@ -183,6 +183,196 @@
         },
         {
           "type": "table",
+          "name": "book_user_stamps",
+          "columns": [
+            {
+              "name": "id",
+              "datatype": {
+                "type": "char",
+                "prec": 36
+              },
+              "is_primary": true
+            },
+            {
+              "name": "book_id",
+              "datatype": {
+                "type": "char",
+                "prec": 36
+              }
+            },
+            {
+              "name": "page_num",
+              "datatype": {
+                "type": "int"
+              }
+            },
+            {
+              "name": "user_id",
+              "datatype": {
+                "type": "char",
+                "prec": 36
+              }
+            },
+            {
+              "name": "stamp_id",
+              "datatype": {
+                "type": "char",
+                "prec": 36
+              }
+            },
+            {
+              "name": "created_at",
+              "datatype": {
+                "type": "timestamp"
+              },
+              "default": "CURRENT_TIMESTAMP"
+            },
+            {
+              "name": "updated_at",
+              "datatype": {
+                "type": "timestamp"
+              },
+              "default": "CURRENT_TIMESTAMP"
+            }
+          ],
+          "primary_keys": [
+            {
+              "name": "id",
+              "datatype": {
+                "type": "char",
+                "prec": 36
+              },
+              "is_primary": true
+            }
+          ],
+          "indexes": [
+            {
+              "name": "book_id",
+              "fields": [
+                {
+                  "name": "book_id",
+                  "datatype": {
+                    "type": "char",
+                    "prec": 36
+                  }
+                }
+              ]
+            },
+            {
+              "name": "stamp_id",
+              "fields": [
+                {
+                  "name": "stamp_id",
+                  "datatype": {
+                    "type": "char",
+                    "prec": 36
+                  }
+                }
+              ]
+            },
+            {
+              "name": "user_id",
+              "fields": [
+                {
+                  "name": "user_id",
+                  "datatype": {
+                    "type": "char",
+                    "prec": 36
+                  }
+                }
+              ]
+            },
+            {
+              "name": "book_user_stamps_id_pkey",
+              "fields": [
+                {
+                  "name": "id",
+                  "datatype": {
+                    "type": "char",
+                    "prec": 36
+                  },
+                  "is_primary": true
+                }
+              ],
+              "is_unique": true,
+              "is_primary": true
+            }
+          ],
+          "foreign_keys": [
+            {
+              "name": "book_user_stamps_ibfk_1",
+              "column": [
+                {
+                  "name": "book_id",
+                  "datatype": {
+                    "type": "char",
+                    "prec": 36
+                  }
+                }
+              ],
+              "ref_table": "books",
+              "ref_column": [
+                {
+                  "name": "id",
+                  "datatype": {
+                    "type": "char",
+                    "prec": 36
+                  },
+                  "is_primary": true
+                }
+              ]
+            },
+            {
+              "name": "book_user_stamps_ibfk_2",
+              "column": [
+                {
+                  "name": "user_id",
+                  "datatype": {
+                    "type": "char",
+                    "prec": 36
+                  }
+                }
+              ],
+              "ref_table": "users",
+              "ref_column": [
+                {
+                  "name": "id",
+                  "datatype": {
+                    "type": "varchar",
+                    "prec": 32
+                  },
+                  "is_primary": true
+                }
+              ]
+            },
+            {
+              "name": "book_user_stamps_ibfk_3",
+              "column": [
+                {
+                  "name": "stamp_id",
+                  "datatype": {
+                    "type": "char",
+                    "prec": 36
+                  }
+                }
+              ],
+              "ref_table": "stamps",
+              "ref_column": [
+                {
+                  "name": "id",
+                  "datatype": {
+                    "type": "char",
+                    "prec": 36
+                  },
+                  "is_primary": true
+                }
+              ]
+            }
+          ],
+          "manual": true
+        },
+        {
+          "type": "table",
           "name": "books",
           "columns": [
             {

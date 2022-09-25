@@ -48,7 +48,7 @@ func (h *Handlers) SignUp(c echo.Context) error {
 		Password: string(hashedPass),
 	}
 
-	err = h.Repository.Create(ctx, newUser)
+	err = h.Repository.CreateUser(ctx, newUser)
 
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err)
@@ -72,7 +72,7 @@ func (h *Handlers) Login(c echo.Context) error {
 		Password: loginReq.Password,
 	}
 
-	user, err := h.Repository.FindByID(ctx, user.ID)
+	user, err := h.Repository.FindUserByID(ctx, user.ID)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}

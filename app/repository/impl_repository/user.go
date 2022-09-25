@@ -9,7 +9,7 @@ import (
 	"github.com/hackathon-22-digicon-team4/comiQ-server/app/repository"
 )
 
-func (r *Repository) Create(ctx context.Context, user model.User) error {
+func (r *Repository) CreateUser(ctx context.Context, user model.User) error {
 	txn, err := r.db.BeginRWTx(ctx)
 	if err != nil {
 		return err
@@ -26,7 +26,7 @@ func (r *Repository) Create(ctx context.Context, user model.User) error {
 	return txn.Commit()
 }
 
-func (r *Repository) FindByID(ctx context.Context, id string) (model.User, error) {
+func (r *Repository) FindUserByID(ctx context.Context, id string) (model.User, error) {
 	txn, err := r.db.BeginROTx(ctx)
 	if err != nil {
 		return model.User{}, err

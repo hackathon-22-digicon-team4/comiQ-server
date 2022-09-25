@@ -12,12 +12,14 @@ import (
 type Handlers struct {
 	Repository   repository.Repository
 	SeesionStore sessions.Store
+	AssetHost    string
 }
 
-func NewHandlers(repo repository.Repository, sessionStore sessions.Store) *Handlers {
+func NewHandlers(repo repository.Repository, sessionStore sessions.Store, assetHost string) *Handlers {
 	return &Handlers{
 		Repository:   repo,
 		SeesionStore: sessionStore,
+		AssetHost:    assetHost,
 	}
 }
 
@@ -33,5 +35,8 @@ func (h *Handlers) NewServer() *echo.Echo {
 	apiUsers.POST("/signup", h.SignUp)
 	apiUsers.POST("/login", h.Login)
 	apiUsers.GET("/me", h.Me, echoutil.CheckLogin)
+
+	apiAuthors := api.Group("/authors")
+	apiAuthors.GET("", h.GetAuthors)
 	return e
 }

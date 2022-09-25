@@ -55,6 +55,7 @@ var env = struct {
 	SessionCookieInsecure bool
 	SessionMaxAge         int
 	CORSAllowOrigins      []string
+	AssetHost             string
 }{}
 
 func loadEnv() {
@@ -81,6 +82,7 @@ func loadEnv() {
 	env.SessionCookieInsecure = strings.ToLower(os.Getenv("SESSION_COOKIE_INSECURE")) == "true"
 	env.CORSAllowOrigins = strings.Split(os.Getenv("CORS_ALLOW_ORIGINS"), ";")
 	env.IsProduction = os.Getenv("TAKOS_IS_PRODUCTION") != ""
+	env.AssetHost = getEnv("ASSET_HOST", "example.com")
 }
 
 func getEnv(name string, onMissing string) string {

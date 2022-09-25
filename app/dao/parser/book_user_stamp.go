@@ -17,3 +17,22 @@ func BookUserStamp(bookUserStamp *daocore.BookUserStamp) model.BookUserStamp {
 		StampID:      bookUserStamp.StampID,
 	}
 }
+
+type BookUserStampModel struct {
+	model.BookUserStamp
+}
+
+func (b BookUserStampModel) ToDao() []*daocore.BookUserStamp {
+	bookUserStamp := []*daocore.BookUserStamp{}
+	bookUserStamp = append(bookUserStamp, &daocore.BookUserStamp{
+		ID:           b.ID,
+		BookID:       b.BookID,
+		BookSeriesID: b.BookSeriesID,
+		PageNum:      b.PageNum,
+		X:            b.X,
+		Y:            b.Y,
+		UserID:       b.UserID,
+		StampID:      b.StampID,
+	})
+	return bookUserStamp
+}

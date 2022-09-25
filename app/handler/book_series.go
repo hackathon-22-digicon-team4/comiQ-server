@@ -15,6 +15,14 @@ type BookSeries struct {
 	ImageURL    string `json:"imageUrl,omitempty"`
 }
 
+type Book struct {
+	ID           string `json:"id,omitempty"`
+	Title        string `json:"title,omitempty"`
+	BookSeriesID string `json:"bookSeriesId,omitempty"`
+	TotalPages   int    `json:"totalPages,omitempty"`
+	ImageURL     string `json:"imageUrl,omitempty"`
+}
+
 func (h *Handlers) GetBookSeries(c echo.Context) error {
 	ctx := c.Request().Context()
 	bookSeries, err := h.Repository.FindAllBookSeries(ctx)
@@ -30,6 +38,26 @@ func (h *Handlers) GetBookSeries(c echo.Context) error {
 			AuthorName:  b.AuthorName,
 			Description: b.Description,
 			ImageURL:    b.ImageURL(h.AssetHost),
+		})
+	}
+	return c.JSON(http.StatusOK, res)
+}
+
+func (h *Handlers) GetBooksByBookSeriesID(c echo.Context) error {
+	ctx := c.Request().Context()
+	bookSeriesID := c.Param("id")
+	books, err := h.Repository.FindBooksByBookSeriesID(ctx, bookSeriesID)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusInternalServerError, err)
+	}
+	res := make([]Book, 0)
+	for _, b := range books {
+		res = append(res, Book{
+			ID:           b.ID,
+			Title:        b.Title,
+			BookSeriesID: b.BookSeriesID,
+			TotalPages:   b.TotalPages,
+			ImageURL:     b.ImageURL(h.AssetHost),
 		})
 	}
 	return c.JSON(http.StatusOK, res)

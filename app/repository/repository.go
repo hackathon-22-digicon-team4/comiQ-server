@@ -6,4 +6,5 @@ type Repository interface {
 	BookSeriesRepository
 	BookRepository
 	StampRepository
+	BookUserStampRepository
 }

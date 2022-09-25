@@ -24,3 +24,16 @@ func (r *Repository) FindBooksByBookSeriesID(ctx context.Context, bookSeriesID s
 	}
 	return res, nil
 }
+
+func (r *Repository) FindBookByID(ctx context.Context, ID string) (model.Book, error) {
+	txn, err := r.db.BeginROTx(ctx)
+	if err != nil {
+		return model.Book{}, err
+	}
+	defer txn.Rollback()
+	book, err := dao.SelectOneBookByID(ctx, txn, ID)
+	if err != nil {
+		return model.Book{}, err
+	}
+	return parser.Book(&book), nil
+}

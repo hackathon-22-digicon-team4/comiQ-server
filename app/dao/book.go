@@ -5,3 +5,5 @@ import (
 )
 
 var SelectBookByBookSeriesID = daocore.SelectBookByBookSeriesID
+
+var SelectOneBookByID = daocore.SelectOneBookByID

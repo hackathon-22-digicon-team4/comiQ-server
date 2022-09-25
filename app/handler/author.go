@@ -6,6 +6,10 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+type GetAuthorsResponse struct {
+	Authors []Author `json:"authors"`
+}
+
 type Author struct {
 	ID       string `json:"id,omitempty"`
 	Name     string `json:"name,omitempty"`
@@ -18,13 +22,15 @@ func (h *Handlers) GetAuthors(c echo.Context) error {
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err)
 	}
-	res := make([]Author, 0)
+	as := make([]Author, 0)
 	for _, author := range authors {
-		res = append(res, Author{
+		as = append(as, Author{
 			ID:       author.ID,
 			Name:     author.Name,
 			ImageURL: author.ImageURL(h.AssetHost),
 		})
 	}
-	return c.JSON(http.StatusOK, res)
+	return c.JSON(http.StatusOK, GetAuthorsResponse{
+		Authors: as,
+	})
 }

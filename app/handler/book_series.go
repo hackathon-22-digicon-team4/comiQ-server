@@ -19,6 +19,10 @@ type BookSeries struct {
 	ImageURL    string `json:"imageUrl,omitempty"`
 }
 
+type GetBooksByBookSeriesIDResponse struct {
+	Books []Book `json:"books"`
+}
+
 type Book struct {
 	ID           string `json:"id,omitempty"`
 	Title        string `json:"title,omitempty"`
@@ -56,9 +60,9 @@ func (h *Handlers) GetBooksByBookSeriesID(c echo.Context) error {
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err)
 	}
-	res := make([]Book, 0)
+	bs := make([]Book, 0)
 	for _, b := range books {
-		res = append(res, Book{
+		bs = append(bs, Book{
 			ID:           b.ID,
 			Title:        b.Title,
 			BookSeriesID: b.BookSeriesID,
@@ -66,5 +70,7 @@ func (h *Handlers) GetBooksByBookSeriesID(c echo.Context) error {
 			ImageURL:     b.ImageURL(h.AssetHost),
 		})
 	}
-	return c.JSON(http.StatusOK, res)
+	return c.JSON(http.StatusOK, GetBooksByBookSeriesIDResponse{
+		Books: bs,
+	})
 }

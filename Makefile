@@ -38,4 +38,4 @@ dao:
 
 .PHONY: seed
 seed: __init-db-args
-	mysql -u$(USERNAME) -p$(PASS) -P$(PORT) --protocol=tcp $(DBNAME) < test/data/users.sql
+	for file in $$(find test/data -type f -name '*.sql'); do mysql -u$(USERNAME) -p$(PASS) -h$(HOST) -P$(PORT) --protocol='tcp' --database=$(DBNAME) < $$file; done

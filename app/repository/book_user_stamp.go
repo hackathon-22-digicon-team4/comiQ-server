@@ -9,4 +9,5 @@ import (
 type BookUserStampRepository interface {
 	FindBookUserStampsByQuery(ctx context.Context, bookSeriesID string, bookID string, userID string, stampID string) ([]model.BookUserStamp, error)
 	CreateBookUserStamp(ctx context.Context, bookUserStamp model.BookUserStamp) error
+	DeleteBookUserStampByID(ctx context.Context, id string) error
 }

@@ -38,3 +38,16 @@ func (r *Repository) CreateBookUserStamp(ctx context.Context, bookUserStamp mode
 	}
 	return txn.Commit()
 }
+
+func (r *Repository) DeleteBookUserStampByID(ctx context.Context, id string) error {
+	txn, err := r.BeginRWTx(ctx)
+	if err != nil {
+		return err
+	}
+	defer txn.Rollback()
+	err = dao.DeleteOneBookUserStampByID(ctx, txn, id)
+	if err != nil {
+		return err
+	}
+	return txn.Commit()
+}

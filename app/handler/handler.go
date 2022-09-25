@@ -49,5 +49,6 @@ func (h *Handlers) NewServer() *echo.Echo {
 	apiBookUserStamp := api.Group("/book_user_stamps")
 	apiBookUserStamp.GET("", h.GetBookUserStamps)
 	apiBookUserStamp.POST("", h.PostBookUserStamps, echoutil.CheckLogin)
+	apiBookUserStamp.DELETE("/:id", h.DeleteBookUserStamp, echoutil.CheckLogin)
 	return e
 }

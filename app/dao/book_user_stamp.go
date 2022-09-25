@@ -10,6 +10,8 @@ import (
 
 var InsertBookUserStamp = daocore.InsertBookUserStamp
 
+var DeleteOneBookUserStampByID = daocore.DeleteOneBookUserStampByID
+
 // BookID, BookSeriesID, UserID, StampIDでユーザーのスタンプを取得する
 // ただし、それぞれは必須ではない
 // 空文字の場合は、その条件は無視される

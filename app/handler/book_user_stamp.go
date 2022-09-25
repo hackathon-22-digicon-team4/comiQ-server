@@ -89,3 +89,13 @@ func (h *Handlers) PostBookUserStamps(c echo.Context) error {
 		ID: bus.ID,
 	})
 }
+
+// Delete a book user stamp
+func (h *Handlers) DeleteBookUserStamp(c echo.Context) error {
+	ctx := c.Request().Context()
+	id := c.Param("id")
+	if err := h.Repository.DeleteBookUserStampByID(ctx, id); err != nil {
+		return echo.NewHTTPError(http.StatusInternalServerError, err)
+	}
+	return c.NoContent(http.StatusOK)
+}

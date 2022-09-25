@@ -36,7 +36,7 @@ func main() {
 	}
 	db := db.NewDB(rwDB, roDB)
 	repo := impl_repository.NewRepository(db)
-	h := handler.NewHandlers(repo, store)
+	h := handler.NewHandlers(repo, store, env.AssetHost)
 	e := h.NewServer()
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%d", env.PORT)))
 }

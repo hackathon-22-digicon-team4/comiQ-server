@@ -12,12 +12,14 @@ import (
 type Handlers struct {
 	Repository   repository.Repository
 	SeesionStore sessions.Store
+	AssetHost    string
 }
 
-func NewHandlers(repo repository.Repository, sessionStore sessions.Store) *Handlers {
+func NewHandlers(repo repository.Repository, sessionStore sessions.Store, assetHost string) *Handlers {
 	return &Handlers{
 		Repository:   repo,
 		SeesionStore: sessionStore,
+		AssetHost: assetHost,
 	}
 }
 

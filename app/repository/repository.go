@@ -4,4 +4,5 @@ type Repository interface {
 	UserRepository
 	AuthorRepository
 	BookSeriesRepository
+	BookRepository
 }

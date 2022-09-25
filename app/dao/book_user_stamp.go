@@ -8,6 +8,8 @@ import (
 	"github.com/hackathon-22-digicon-team4/comiQ-server/gen/comiq/daocore"
 )
 
+var InsertBookUserStamp = daocore.InsertBookUserStamp
+
 // BookID, BookSeriesID, UserID, StampIDでユーザーのスタンプを取得する
 // ただし、それぞれは必須ではない
 // 空文字の場合は、その条件は無視される

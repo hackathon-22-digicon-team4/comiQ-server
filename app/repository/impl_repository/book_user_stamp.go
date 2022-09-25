@@ -24,3 +24,17 @@ func (r *Repository) FindBookUserStampsByQuery(ctx context.Context, bookSeriesID
 	}
 	return res, nil
 }
+
+func (r *Repository) CreateBookUserStamp(ctx context.Context, bookUserStamp model.BookUserStamp) error {
+	txn, err := r.BeginRWTx(ctx)
+	if err != nil {
+		return err
+	}
+	defer txn.Rollback()
+	err = dao.InsertBookUserStamp(ctx, txn, parser.BookUserStampModel{
+		BookUserStamp: bookUserStamp,
+		}.ToDao()); if err != nil {
+		return err
+	}
+	return txn.Commit()
+}

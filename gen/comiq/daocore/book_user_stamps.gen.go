@@ -17,7 +17,13 @@ var BookUserStampAllColumns = []string{
   
   "book_id",
   
+  "book_series_id",
+  
   "page_num",
+  
+  "x",
+  
+  "y",
   
   "user_id",
   
@@ -34,7 +40,13 @@ var BookUserStampColumnsWOMagics = []string{
   
   "book_id",
   
+  "book_series_id",
+  
   "page_num",
+  
+  "x",
+  
+  "y",
   
   "user_id",
   
@@ -53,6 +65,9 @@ var BookUserStampPrimaryKeyColumns = []string{
   
   
   
+  
+  
+  
 }
 
 
@@ -60,7 +75,10 @@ var BookUserStampPrimaryKeyColumns = []string{
 type BookUserStamp struct {
   ID string
   BookID string
+  BookSeriesID string
   PageNum int
+  X int
+  Y int
   UserID string
   StampID string
   CreatedAt *time.Time
@@ -68,12 +86,12 @@ type BookUserStamp struct {
 }
 
 func (t *BookUserStamp) Values() []interface{} {
-  return []interface{}{t.ID,t.BookID,t.PageNum,t.UserID,t.StampID,
+  return []interface{}{t.ID,t.BookID,t.BookSeriesID,t.PageNum,t.X,t.Y,t.UserID,t.StampID,
   }
 }
 
 func (t *BookUserStamp) SetMap() map[string]interface{} {
-  return map[string]interface{}{"id": t.ID,"book_id": t.BookID,"page_num": t.PageNum,"user_id": t.UserID,"stamp_id": t.StampID,
+  return map[string]interface{}{"id": t.ID,"book_id": t.BookID,"book_series_id": t.BookSeriesID,"page_num": t.PageNum,"x": t.X,"y": t.Y,"user_id": t.UserID,"stamp_id": t.StampID,
   }
 }
 
@@ -82,7 +100,10 @@ func (t *BookUserStamp) Ptrs() []interface{} {
   return []interface{}{
     &t.ID,
     &t.BookID,
+    &t.BookSeriesID,
     &t.PageNum,
+    &t.X,
+    &t.Y,
     &t.UserID,
     &t.StampID,
     &t.CreatedAt,
@@ -107,6 +128,37 @@ func SelectBookUserStampByBookID(ctx context.Context, txn *sql.Tx, book_id strin
     From(BookUserStampTableName).
     Where(squirrel.Eq{
       "book_id": book_id,
+    }).
+    ToSql()
+  if err != nil {
+    return nil, MapError(err)
+  }
+  stmt, err := txn.PrepareContext(ctx, query)
+	if err != nil {
+    return nil, MapError(err)
+	}
+  rows, err := stmt.QueryContext(ctx, params...)
+  if err != nil {
+    return nil, MapError(err)
+  }
+  res := make([]*BookUserStamp, 0)
+  for rows.Next() {
+    t, err := IterateBookUserStamp(rows)
+    if err != nil {
+      return nil, MapError(err)
+    }
+    res = append(res, &t)
+  }
+  return res, nil
+  
+}
+
+func SelectBookUserStampByBookSeriesID(ctx context.Context, txn *sql.Tx, book_series_id string) ([]*BookUserStamp, error) {
+  query, params, err := squirrel.
+    Select(BookUserStampAllColumns...).
+    From(BookUserStampTableName).
+    Where(squirrel.Eq{
+      "book_series_id": book_series_id,
     }).
     ToSql()
   if err != nil {
@@ -290,6 +342,26 @@ func DeleteBookUserStampByBookID(ctx context.Context, txn *sql.Tx, book_id strin
     Delete(BookUserStampTableName).
     Where(squirrel.Eq{
       "book_id": book_id,
+    }).
+    ToSql()
+  if err != nil {
+    return MapError(err)
+  }
+  stmt, err := txn.PrepareContext(ctx, query)
+	if err != nil {
+		return MapError(err)
+	}
+	if _, err = stmt.Exec(params...); err != nil {
+		return MapError(err)
+	}
+	return nil
+}
+
+func DeleteBookUserStampByBookSeriesID(ctx context.Context, txn *sql.Tx, book_series_id string) error {
+  query, params, err := squirrel.
+    Delete(BookUserStampTableName).
+    Where(squirrel.Eq{
+      "book_series_id": book_series_id,
     }).
     ToSql()
   if err != nil {

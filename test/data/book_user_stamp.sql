@@ -1,0 +1,43 @@
+INSERT
+    IGNORE INTO `book_user_stamps` (id, book_id, book_series_id, page_num, x, y, user_id, stamp_id)
+VALUES
+    (
+        '545624ad-2556-470b-9b86-83b19eed1f4a',
+        '0a7259c4-977b-4cf5-a230-42662cb20d16',
+        '0f013f30-e6b6-4f32-a2b7-7ef7f6508fcf',
+        1,
+        24,
+        30,
+        'user1',
+        'a5de88ed-f4fc-44ab-b69c-9d2ec097cb49'
+    ),
+    (
+        '38dde1f1-f368-4404-ae38-1b02e79cf6f8',
+        '0a7259c4-977b-4cf5-a230-42662cb20d16',
+        '0f013f30-e6b6-4f32-a2b7-7ef7f6508fcf',
+        3,
+        20,
+        40,
+        'user1',
+        'a5de88ed-f4fc-44ab-b69c-9d2ec097cb49'
+    ),
+    (
+        '545624ad-2556-470b-9b86-83b19eed1f4b',
+        '0a7259c4-977b-4cf5-a230-42662cb20d16',
+        '0f013f30-e6b6-4f32-a2b7-7ef7f6508fcf',
+        1,
+        20,
+        44,
+        'user2',
+        'a5de88ed-f4fc-44ab-b69c-9d2ec097cb49'
+    ),
+    (
+        '545624ad-2556-470b-9b86-83b19eed1f4c',
+        'c6ee816d-8c19-457c-9855-ffe53df488ea',
+        '5fbf13cf-d4ec-45b6-91ae-41ef9fc0faf6',
+        1,
+        20,
+        44,
+        'user2',
+        'a5de88ed-f4fc-44ab-b69c-9d2ec097cb49'
+    );

@@ -96,12 +96,11 @@ func (h *Handlers) Login(c echo.Context) error {
 }
 
 func (h *Handlers) Me(c echo.Context) error {
-	sess, err := session.Get(echoutil.SessionStoreKey, c)
+	userID, err := echoutil.GetUserID(c)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err)
 	}
-
 	return c.JSON(http.StatusOK, Me{
-		ID: sess.Values[echoutil.SessionUserIDKey].(string),
+		ID: userID,
 	})
 }

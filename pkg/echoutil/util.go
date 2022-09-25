@@ -29,3 +29,12 @@ func CheckLogin(next echo.HandlerFunc) echo.HandlerFunc {
 		return next(c)
 	}
 }
+
+// session情報からuserIDを取得する
+func GetUserID(c echo.Context) (string, error) {
+	sess, err := session.Get(SessionStoreKey, c)
+	if err != nil {
+		return "", err
+	}
+	return sess.Values[SessionUserIDKey].(string), nil
+}

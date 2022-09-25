@@ -19,7 +19,7 @@ func NewHandlers(repo repository.Repository, sessionStore sessions.Store, assetH
 	return &Handlers{
 		Repository:   repo,
 		SeesionStore: sessionStore,
-		AssetHost: assetHost,
+		AssetHost:    assetHost,
 	}
 }
 
@@ -35,5 +35,8 @@ func (h *Handlers) NewServer() *echo.Echo {
 	apiUsers.POST("/signup", h.SignUp)
 	apiUsers.POST("/login", h.Login)
 	apiUsers.GET("/me", h.Me, echoutil.CheckLogin)
+
+	apiAuthors := api.Group("/authors")
+	apiAuthors.GET("", h.GetAuthors)
 	return e
 }

@@ -48,5 +48,6 @@ func (h *Handlers) NewServer() *echo.Echo {
 
 	apiBookUserStamp := api.Group("/book_user_stamps")
 	apiBookUserStamp.GET("", h.GetBookUserStamps)
+	apiBookUserStamp.POST("", h.PostBookUserStamps, echoutil.CheckLogin)
 	return e
 }

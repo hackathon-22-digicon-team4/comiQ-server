@@ -5,6 +5,8 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/hackathon-22-digicon-team4/comiQ-server/app/model"
+	"github.com/hackathon-22-digicon-team4/comiQ-server/pkg/echoutil"
 )
 
 type GetBookUserStampsResponse struct {
@@ -21,6 +23,19 @@ type BookUserStamp struct {
 	UserID           string `json:"userId,omitempty"`
 	StampID          string `json:"stampId,omitempty"`
 	BookPageImageURL string `json:"bookPageImageUrl,omitempty"`
+}
+
+type PostBookUserStampsRequest struct {
+	BookID       string `json:"bookId,omitempty"`
+	BookSeriesID string `json:"bookSeriesId,omitempty"`
+	PageNum      int    `json:"pageNum,omitempty"`
+	X            int    `json:"x,omitempty"`
+	Y            int    `json:"y,omitempty"`
+	StampID      string `json:"stampId,omitempty"`
+}
+
+type PostBookUserStampsResponse struct {
+	ID 			 string `json:"id,omitempty"`
 }
 
 func (h *Handlers) GetBookUserStamps(c echo.Context) error {
@@ -51,5 +66,26 @@ func (h *Handlers) GetBookUserStamps(c echo.Context) error {
 	fmt.Println("buses: ", buses)
 	return c.JSON(http.StatusOK, GetBookUserStampsResponse{
 		BookUserStamps: buses,
+	})
+}
+
+// Create a new book user stamp
+func (h *Handlers) PostBookUserStamps(c echo.Context) error {
+	ctx := c.Request().Context()
+	req := new(PostBookUserStampsRequest)
+	if err := c.Bind(req); err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err)
+	}
+	// userIDはsessionから取得する
+	userID, err := echoutil.GetUserID(c)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusInternalServerError, err)
+	}
+	bus := model.NewBookUserStamp(req.BookID, req.BookSeriesID, req.PageNum, req.X, req.Y, userID, req.StampID)
+	if err := h.Repository.CreateBookUserStamp(ctx, bus); err != nil {
+		return echo.NewHTTPError(http.StatusInternalServerError, err)
+	}
+	return c.JSON(http.StatusOK, PostBookUserStampsResponse{
+		ID: bus.ID,
 	})
 }

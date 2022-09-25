@@ -45,5 +45,8 @@ func (h *Handlers) NewServer() *echo.Echo {
 
 	apiStamps := api.Group("/stamps")
 	apiStamps.GET("", h.GetStamps)
+
+	apiBookUserStamp := api.Group("/book_user_stamps")
+	apiBookUserStamp.GET("", h.GetBookUserStamps)
 	return e
 }

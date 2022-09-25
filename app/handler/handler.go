@@ -38,5 +38,9 @@ func (h *Handlers) NewServer() *echo.Echo {
 
 	apiAuthors := api.Group("/authors")
 	apiAuthors.GET("", h.GetAuthors)
+
+	apiBookSeries := api.Group("/book_series")
+	apiBookSeries.GET("", h.GetBookSeries)
+	apiBookSeries.GET("/:id/books", h.GetBooksByBookSeriesID)
 	return e
 }

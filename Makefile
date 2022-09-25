@@ -39,3 +39,7 @@ dao:
 .PHONY: seed
 seed: __init-db-args
 	for file in $$(find test/data -type f -name '*.sql'); do mysql -u$(USERNAME) -p$(PASS) -h$(HOST) -P$(PORT) --protocol='tcp' --database=$(DBNAME) < $$file; done
+
+.PHONY: delete-db
+delete-db: __init-db-args
+	for file in $$(find ddl -type f -name '*.down.sql'); do mysql -u$(USERNAME) -p$(PASS) -h$(HOST) -P$(PORT) --protocol='tcp' --database=$(DBNAME) < $$file; done

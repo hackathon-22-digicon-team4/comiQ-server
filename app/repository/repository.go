@@ -5,4 +5,5 @@ type Repository interface {
 	AuthorRepository
 	BookSeriesRepository
 	BookRepository
+	StampRepository
 }

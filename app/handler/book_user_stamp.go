@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/labstack/echo/v4"
 	"github.com/hackathon-22-digicon-team4/comiQ-server/app/model"
 	"github.com/hackathon-22-digicon-team4/comiQ-server/pkg/echoutil"
+	"github.com/labstack/echo/v4"
 )
 
 type GetBookUserStampsResponse struct {
@@ -26,16 +26,16 @@ type BookUserStamp struct {
 }
 
 type PostBookUserStampsRequest struct {
-	BookID       string `json:"bookId,omitempty"`
-	BookSeriesID string `json:"bookSeriesId,omitempty"`
-	PageNum      int    `json:"pageNum,omitempty"`
-	X            int    `json:"x,omitempty"`
-	Y            int    `json:"y,omitempty"`
-	StampID      string `json:"stampId,omitempty"`
+	BookID       string `json:"bookId,omitempty" form:"bookId"`
+	BookSeriesID string `json:"bookSeriesId,omitempty" form:"bookSeriesId"`
+	PageNum      int    `json:"pageNum,omitempty" form:"pageNum"`
+	X            int    `json:"x,omitempty" form:"x"`
+	Y            int    `json:"y,omitempty" form:"y"`
+	StampID      string `json:"stampId,omitempty" form:"stampId"`
 }
 
 type PostBookUserStampsResponse struct {
-	ID 			 string `json:"id,omitempty"`
+	ID string `json:"id,omitempty"`
 }
 
 func (h *Handlers) GetBookUserStamps(c echo.Context) error {
@@ -44,7 +44,6 @@ func (h *Handlers) GetBookUserStamps(c echo.Context) error {
 	bookID := c.QueryParam("bookId")
 	userID := c.QueryParam("userId")
 	stampID := c.QueryParam("stampId")
-	fmt.Println("bookSeriesID: ", bookSeriesID)
 	bookUserStamps, err := h.Repository.FindBookUserStampsByQuery(ctx, bookSeriesID, bookID, userID, stampID)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err)

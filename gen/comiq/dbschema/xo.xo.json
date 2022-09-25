@@ -201,6 +201,13 @@
               }
             },
             {
+              "name": "book_series_id",
+              "datatype": {
+                "type": "char",
+                "prec": 36
+              }
+            },
+            {
               "name": "page_num",
               "datatype": {
                 "type": "int"
@@ -271,6 +278,18 @@
               ]
             },
             {
+              "name": "book_series_id",
+              "fields": [
+                {
+                  "name": "book_series_id",
+                  "datatype": {
+                    "type": "char",
+                    "prec": 36
+                  }
+                }
+              ]
+            },
+            {
               "name": "stamp_id",
               "fields": [
                 {
@@ -315,29 +334,6 @@
               "name": "book_user_stamps_ibfk_1",
               "column": [
                 {
-                  "name": "book_id",
-                  "datatype": {
-                    "type": "char",
-                    "prec": 36
-                  }
-                }
-              ],
-              "ref_table": "books",
-              "ref_column": [
-                {
-                  "name": "id",
-                  "datatype": {
-                    "type": "char",
-                    "prec": 36
-                  },
-                  "is_primary": true
-                }
-              ]
-            },
-            {
-              "name": "book_user_stamps_ibfk_2",
-              "column": [
-                {
                   "name": "user_id",
                   "datatype": {
                     "type": "char",
@@ -358,7 +354,53 @@
               ]
             },
             {
+              "name": "book_user_stamps_ibfk_2",
+              "column": [
+                {
+                  "name": "book_id",
+                  "datatype": {
+                    "type": "char",
+                    "prec": 36
+                  }
+                }
+              ],
+              "ref_table": "books",
+              "ref_column": [
+                {
+                  "name": "id",
+                  "datatype": {
+                    "type": "char",
+                    "prec": 36
+                  },
+                  "is_primary": true
+                }
+              ]
+            },
+            {
               "name": "book_user_stamps_ibfk_3",
+              "column": [
+                {
+                  "name": "book_series_id",
+                  "datatype": {
+                    "type": "char",
+                    "prec": 36
+                  }
+                }
+              ],
+              "ref_table": "book_series",
+              "ref_column": [
+                {
+                  "name": "id",
+                  "datatype": {
+                    "type": "char",
+                    "prec": 36
+                  },
+                  "is_primary": true
+                }
+              ]
+            },
+            {
+              "name": "book_user_stamps_ibfk_4",
               "column": [
                 {
                   "name": "stamp_id",

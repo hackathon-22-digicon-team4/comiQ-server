@@ -228,8 +228,8 @@
             {
               "name": "user_id",
               "datatype": {
-                "type": "char",
-                "prec": 36
+                "type": "varchar",
+                "prec": 32
               }
             },
             {
@@ -307,8 +307,8 @@
                 {
                   "name": "user_id",
                   "datatype": {
-                    "type": "char",
-                    "prec": 36
+                    "type": "varchar",
+                    "prec": 32
                   }
                 }
               ]
@@ -336,8 +336,8 @@
                 {
                   "name": "user_id",
                   "datatype": {
-                    "type": "char",
-                    "prec": 36
+                    "type": "varchar",
+                    "prec": 32
                   }
                 }
               ],
@@ -583,77 +583,6 @@
             }
           ],
           "manual": true
-        },
-        {
-          "type": "table",
-          "name": "sessions",
-          "columns": [
-            {
-              "name": "id",
-              "datatype": {
-                "type": "int"
-              },
-              "is_primary": true,
-              "is_sequence": true
-            },
-            {
-              "name": "session_data",
-              "datatype": {
-                "type": "longblob",
-                "nullable": true
-              }
-            },
-            {
-              "name": "created_on",
-              "datatype": {
-                "type": "timestamp",
-                "nullable": true
-              },
-              "default": "CURRENT_TIMESTAMP"
-            },
-            {
-              "name": "modified_on",
-              "datatype": {
-                "type": "timestamp"
-              },
-              "default": "CURRENT_TIMESTAMP"
-            },
-            {
-              "name": "expires_on",
-              "datatype": {
-                "type": "timestamp",
-                "nullable": true
-              },
-              "default": "CURRENT_TIMESTAMP"
-            }
-          ],
-          "primary_keys": [
-            {
-              "name": "id",
-              "datatype": {
-                "type": "int"
-              },
-              "is_primary": true,
-              "is_sequence": true
-            }
-          ],
-          "indexes": [
-            {
-              "name": "sessions_id_pkey",
-              "fields": [
-                {
-                  "name": "id",
-                  "datatype": {
-                    "type": "int"
-                  },
-                  "is_primary": true,
-                  "is_sequence": true
-                }
-              ],
-              "is_unique": true,
-              "is_primary": true
-            }
-          ]
         },
         {
           "type": "table",

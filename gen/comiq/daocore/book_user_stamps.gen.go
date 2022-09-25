@@ -19,6 +19,10 @@ var BookUserStampAllColumns = []string{
   
   "page_num",
   
+  "x",
+  
+  "y",
+  
   "user_id",
   
   "stamp_id",
@@ -35,6 +39,10 @@ var BookUserStampColumnsWOMagics = []string{
   "book_id",
   
   "page_num",
+  
+  "x",
+  
+  "y",
   
   "user_id",
   
@@ -53,6 +61,8 @@ var BookUserStampPrimaryKeyColumns = []string{
   
   
   
+  
+  
 }
 
 
@@ -61,6 +71,8 @@ type BookUserStamp struct {
   ID string
   BookID string
   PageNum int
+  X int
+  Y int
   UserID string
   StampID string
   CreatedAt *time.Time
@@ -68,12 +80,12 @@ type BookUserStamp struct {
 }
 
 func (t *BookUserStamp) Values() []interface{} {
-  return []interface{}{t.ID,t.BookID,t.PageNum,t.UserID,t.StampID,
+  return []interface{}{t.ID,t.BookID,t.PageNum,t.X,t.Y,t.UserID,t.StampID,
   }
 }
 
 func (t *BookUserStamp) SetMap() map[string]interface{} {
-  return map[string]interface{}{"id": t.ID,"book_id": t.BookID,"page_num": t.PageNum,"user_id": t.UserID,"stamp_id": t.StampID,
+  return map[string]interface{}{"id": t.ID,"book_id": t.BookID,"page_num": t.PageNum,"x": t.X,"y": t.Y,"user_id": t.UserID,"stamp_id": t.StampID,
   }
 }
 
@@ -83,6 +95,8 @@ func (t *BookUserStamp) Ptrs() []interface{} {
     &t.ID,
     &t.BookID,
     &t.PageNum,
+    &t.X,
+    &t.Y,
     &t.UserID,
     &t.StampID,
     &t.CreatedAt,

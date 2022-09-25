@@ -8,4 +8,5 @@ import (
 
 type BookRepository interface {
 	FindBooksByBookSeriesID(ctx context.Context, bookSeriesID string) ([]model.Book, error)
+	FindBookByID(ctx context.Context, ID string) (model.Book, error)
 }

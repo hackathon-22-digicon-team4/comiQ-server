@@ -96,8 +96,8 @@
             {
               "name": "description",
               "datatype": {
-                "type": "text",
-                "nullable": true
+                "type": "varchar",
+                "prec": 1000
               }
             },
             {

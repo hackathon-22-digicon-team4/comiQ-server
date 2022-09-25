@@ -56,7 +56,7 @@ type BookSery struct {
   ID string
   Title string
   AuthorID string
-  Description 
+  Description string
   CreatedAt *time.Time
   UpdatedAt *time.Time
 }

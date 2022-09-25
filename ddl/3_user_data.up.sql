@@ -2,6 +2,8 @@ CREATE TABLE book_user_stamps (
     id CHAR(36) NOT NULL,
     book_id CHAR(36) NOT NULL,
     page_num INT NOT NULL,
+    x INT NOT NULL,
+    y INT NOT NULL,
     user_id CHAR(36) NOT NULL,
     stamp_id CHAR(36) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,

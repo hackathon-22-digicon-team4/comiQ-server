@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"encoding/json"
 
 	"github.com/hackathon-22-digicon-team4/comiQ-server/app/handler"
 	"github.com/hackathon-22-digicon-team4/comiQ-server/app/repository/impl_repository"
@@ -60,6 +61,7 @@ var env = struct {
 
 func loadEnv() {
 	var err error
+	loadEnvFromJsonString(os.Getenv("JSON_FROM_SECRET_MANAGER_STR"))
 	env.DBHost = os.Getenv("DB_HOST")
 	env.RoDBHost = os.Getenv("RO_DB_HOST")
 	if env.RoDBHost == "" {
@@ -91,4 +93,24 @@ func getEnv(name string, onMissing string) string {
 		return v
 	}
 	return onMissing
+}
+
+// 環境変数のJSON_FROM_SECRET_MANAGER_STRのjson文字列をparseして環境変数として読み込む
+func loadEnvFromJsonString(s string) {
+	fmt.Println(s)
+	if s == "" {
+		return
+	}
+	// json文字列sをmapに変換
+	m := map[string]string{}
+	err := json.Unmarshal([]byte(s), &m)
+	fmt.Println(m)
+	if err != nil {
+		log.Fatal(err)
+	}
+	// mapのkeyを環境変数として読み込む
+	for k, v := range m {
+		os.Setenv(k, v)
+	}
+	return
 }

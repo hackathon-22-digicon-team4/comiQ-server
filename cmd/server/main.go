@@ -70,7 +70,7 @@ func loadEnv() {
 	env.DBPass = getEnv("DB_PASS", "root")
 	env.DBName = getEnv("DB_NAME", "comiq_dev")
 	env.PORT, _ = strconv.Atoi(getEnv("PORT", "50001"))
-	env.SessionCookieName = getEnv("SESSION_COOKIE_NAME", "sessions")
+	env.SessionCookieName = getEnv("SESSION_COOKIE_NAME", "session")
 	env.SessionSecret, err = base64.StdEncoding.DecodeString(getEnv("SESSION_SECRET", "Zm9vYmFy"))
 	if err != nil {
 		log.Fatal(err)
@@ -81,7 +81,7 @@ func loadEnv() {
 	}
 	env.SessionCookieInsecure = strings.ToLower(os.Getenv("SESSION_COOKIE_INSECURE")) == "true"
 	env.CORSAllowOrigins = strings.Split(os.Getenv("CORS_ALLOW_ORIGINS"), ";")
-	env.IsProduction = os.Getenv("TAKOS_IS_PRODUCTION") != ""
+	env.IsProduction = os.Getenv("IS_PRODUCTION") != ""
 	env.AssetHost = getEnv("ASSET_HOST", "example.com")
 }
 

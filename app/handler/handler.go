@@ -31,6 +31,7 @@ func (h *Handlers) NewServer() *echo.Echo {
 	e.Use(middleware.CORS())
 
 	api := e.Group("/v1")
+	api.GET("/", h.Health)
 	apiUsers := api.Group("/users")
 	apiUsers.POST("/signup", h.SignUp)
 	apiUsers.POST("/login", h.Login)

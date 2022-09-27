@@ -32,3 +32,20 @@ func (r *Repository) FindAllBookSeries(ctx context.Context) ([]model.BookSeries,
 	}
 	return res, nil
 }
+
+func (r *Repository) FindBookSeriesByID(ctx context.Context, ID string) (model.BookSeries, error) {
+	txn, err := r.db.BeginROTx(ctx)
+	if err != nil {
+		return model.BookSeries{}, err
+	}
+	defer txn.Rollback()
+	bookSeries, err := dao.SelectOneBookSeriesByID(ctx, txn, ID)
+	if err != nil {
+		return model.BookSeries{}, err
+	}
+	author, err := dao.SelectOneAuthorByID(ctx, txn, bookSeries.AuthorID)
+	if err != nil {
+		return model.BookSeries{}, err
+	}
+	return parser.BookSeries(&bookSeries, author.Name), nil
+}

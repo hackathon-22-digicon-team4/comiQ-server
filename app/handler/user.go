@@ -104,3 +104,15 @@ func (h *Handlers) Me(c echo.Context) error {
 		ID: userID,
 	})
 }
+
+// logout
+// セッションをセッションストアから削除する
+func (h *Handlers) Logout(c echo.Context) error {
+	sess, err := session.Get(echoutil.SessionStoreKey, c)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusInternalServerError, err)
+	}
+	delete(sess.Values, echoutil.SessionUserIDKey)
+	sess.Save(c.Request(), c.Response())
+	return c.JSON(http.StatusOK, "success loging out")
+}

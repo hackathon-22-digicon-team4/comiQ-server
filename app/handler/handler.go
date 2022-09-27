@@ -35,7 +35,7 @@ func (h *Handlers) NewServer() *echo.Echo {
 	apiUsers := api.Group("/users")
 	apiUsers.POST("/signup", h.SignUp)
 	apiUsers.POST("/login", h.Login)
-	apiUsers.POST("/logout", h.Logout)
+	apiUsers.POST("/logout", h.Logout, echoutil.CheckLogin)
 	apiUsers.GET("/me", h.Me, echoutil.CheckLogin)
 
 	apiAuthors := api.Group("/authors")

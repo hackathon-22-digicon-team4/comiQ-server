@@ -106,13 +106,13 @@ func (h *Handlers) Me(c echo.Context) error {
 }
 
 // logout
-// ログアウトするときにセッションを削除する
+// セッションをセッションストアから削除する
 func (h *Handlers) Logout(c echo.Context) error {
 	sess, err := session.Get(echoutil.SessionStoreKey, c)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err)
 	}
-	sess.Options.MaxAge = -1
+	delete(sess.Values, echoutil.SessionUserIDKey)
 	sess.Save(c.Request(), c.Response())
 	return c.JSON(http.StatusOK, "success loging out")
 }

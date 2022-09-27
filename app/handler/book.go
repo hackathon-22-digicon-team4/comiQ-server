@@ -7,11 +7,14 @@ import (
 )
 
 type GetBookByIDResponse struct {
-	ID           string `json:"id,omitempty"`
-	Title        string `json:"title,omitempty"`
-	BookSeriesID string `json:"bookSeriesId,omitempty"`
-	TotalPages   int    `json:"totalPages,omitempty"`
-	ImageURL     string `json:"imageUrl,omitempty"`
+	ID              string `json:"id,omitempty"`
+	Title           string `json:"title,omitempty"`
+	BookSeriesID    string `json:"bookSeriesId,omitempty"`
+	BookSeriesTitle string `json:"bookSeriesName,omitempty"`
+	AuthorID        string `json:"authorId,omitempty"`
+	AuthorName      string `json:"authorName,omitempty"`
+	TotalPages      int    `json:"totalPages,omitempty"`
+	ImageURL        string `json:"imageUrl,omitempty"`
 }
 
 func (h *Handlers) GetBookByID(c echo.Context) error {
@@ -21,11 +24,15 @@ func (h *Handlers) GetBookByID(c echo.Context) error {
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err)
 	}
+	bookSeries, err := h.Repository.FindBookSeriesByID(ctx, book.BookSeriesID)
 	return c.JSON(http.StatusOK, GetBookByIDResponse{
-		ID:           book.ID,
-		Title:        book.Title,
-		BookSeriesID: book.BookSeriesID,
-		TotalPages:   book.TotalPages,
-		ImageURL:     book.ImageURL(h.AssetHost),
+		ID:              book.ID,
+		Title:           book.Title,
+		BookSeriesID:    book.BookSeriesID,
+		BookSeriesTitle: bookSeries.Title,
+		AuthorID:        bookSeries.AuthorID,
+		AuthorName:      bookSeries.AuthorName,
+		TotalPages:      book.TotalPages,
+		ImageURL:        book.ImageURL(h.AssetHost),
 	})
 }

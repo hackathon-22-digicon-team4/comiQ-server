@@ -34,10 +34,6 @@ type PostBookUserStampsRequest struct {
 	StampID      string `json:"stampId,omitempty" form:"stampId"`
 }
 
-type PostBookUserStampsResponse struct {
-	ID string `json:"id,omitempty"`
-}
-
 func (h *Handlers) GetBookUserStamps(c echo.Context) error {
 	ctx := c.Request().Context()
 	bookSeriesID := c.QueryParam("bookSeriesId")
@@ -84,8 +80,16 @@ func (h *Handlers) PostBookUserStamps(c echo.Context) error {
 	if err := h.Repository.CreateBookUserStamp(ctx, bus); err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err)
 	}
-	return c.JSON(http.StatusOK, PostBookUserStampsResponse{
-		ID: bus.ID,
+	return c.JSON(http.StatusOK, BookUserStamp{
+		ID:               bus.ID,
+		BookID:           bus.BookID,
+		BookSeriesID:     bus.BookSeriesID,
+		PageNum:          bus.PageNum,
+		X:                bus.X,
+		Y:                bus.Y,
+		UserID:           bus.UserID,
+		StampID:          bus.StampID,
+		BookPageImageURL: bus.BookPageImageURL(h.AssetHost),
 	})
 }
 

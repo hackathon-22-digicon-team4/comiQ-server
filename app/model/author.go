@@ -10,5 +10,5 @@ type Author struct {
 }
 
 func (a Author) ImageURL(assetHost string) string {
-	return fmt.Sprintf("https://%s/authors/%s.jpg", assetHost, a.ID)
+	return fmt.Sprintf("https://%s/authors/%s.jpeg", assetHost, a.ID)
 }

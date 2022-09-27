@@ -38,9 +38,14 @@ func (h *Handlers) GetBookUserStamps(c echo.Context) error {
 	ctx := c.Request().Context()
 	bookSeriesID := c.QueryParam("bookSeriesId")
 	bookID := c.QueryParam("bookId")
-	userID := c.QueryParam("userId")
+	users := c.QueryParam("users")
 	stampID := c.QueryParam("stampId")
-	bookUserStamps, err := h.Repository.FindBookUserStampsByQuery(ctx, bookSeriesID, bookID, userID, stampID)
+	// userIDはsessionから取得する
+	userID, err := echoutil.GetUserID(c)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusInternalServerError, err)
+	}
+	bookUserStamps, err := h.Repository.FindBookUserStampsByQuery(ctx, bookSeriesID, bookID, users, userID, stampID)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err)
 	}

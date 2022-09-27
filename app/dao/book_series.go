@@ -8,6 +8,8 @@ import (
 	"github.com/hackathon-22-digicon-team4/comiQ-server/gen/comiq/daocore"
 )
 
+var SelectOneBookSeriesByID = daocore.SelectOneBookSeryByID
+
 func SelectAllBookSeries(ctx context.Context, tx *sql.Tx) ([]*daocore.BookSery, error) {
 	sql, params, err := squirrel.Select(daocore.BookSeryAllColumns...).From(daocore.BookSeryTableName).ToSql()
 	if err != nil {

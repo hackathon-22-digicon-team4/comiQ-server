@@ -10,5 +10,5 @@ type Stamp struct {
 }
 
 func (s Stamp) ImageURL(assetHost string) string {
-	return fmt.Sprintf("https://%s/stamps/%s.jpg", assetHost, s.ID)
+	return fmt.Sprintf("https://%s/stamps/%s.jpeg", assetHost, s.ID)
 }

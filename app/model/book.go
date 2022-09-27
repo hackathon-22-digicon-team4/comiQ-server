@@ -12,5 +12,5 @@ type Book struct {
 }
 
 func (b Book) ImageURL(assetHost string) string {
-	return fmt.Sprintf("https://%s/books/%s.jpg", assetHost, b.ID)
+	return fmt.Sprintf("https://%s/book_series/%s/books/%s.jpeg", assetHost, b.BookSeriesID, b.ID)
 }

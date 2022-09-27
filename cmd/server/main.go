@@ -19,13 +19,13 @@ import (
 
 func main() {
 	loadEnv()
-	rwDB, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", env.DBUser, env.DBPass, env.DBHost, env.DBPort, env.DBName))
+	rwDB, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s)/%s?parseTime=true", env.DBUser, env.DBPass, env.DBHost, env.DBName))
 	if err != nil {
 		log.Fatal(err)
 	}
 	rwDB.SetConnMaxLifetime(60 * time.Second)
 	rwDB.SetMaxOpenConns(10)
-	roDB, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", env.DBUser, env.DBPass, env.RoDBHost, env.DBPort, env.DBName))
+	roDB, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s)/%s?parseTime=true", env.DBUser, env.DBPass, env.RoDBHost, env.DBName))
 	if err != nil {
 		log.Fatal(err)
 	}

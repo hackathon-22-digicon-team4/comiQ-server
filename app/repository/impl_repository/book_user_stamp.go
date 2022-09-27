@@ -8,13 +8,13 @@ import (
 	"github.com/hackathon-22-digicon-team4/comiQ-server/app/model"
 )
 
-func (r *Repository) FindBookUserStampsByQuery(ctx context.Context, bookSeriesID string, bookID string, userID string, stampID string) ([]model.BookUserStamp, error) {
+func (r *Repository) FindBookUserStampsByQuery(ctx context.Context, bookSeriesID string, bookID, users string, userID string, stampID string) ([]model.BookUserStamp, error) {
 	txn, err := r.db.BeginROTx(ctx)
 	if err != nil {
 		return nil, err
 	}
 	defer txn.Rollback()
-	bookUserStamps, err := dao.SelectBookUserStampByQuery(ctx, txn, bookSeriesID, bookID, userID, stampID)
+	bookUserStamps, err := dao.SelectBookUserStampByQuery(ctx, txn, bookSeriesID, bookID, users, userID, stampID)
 	if err != nil {
 		return nil, err
 	}

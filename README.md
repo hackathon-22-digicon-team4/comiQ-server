@@ -1,5 +1,9 @@
 # comiQ-server
 
+## Specification
+
+[specification](https://github.com/hackathon-22-digicon-team4/comiQ-spec)
+
 ## Prerequisites
 
 - go: 1.18

@@ -28,7 +28,11 @@ func (h *Handlers) NewServer() *echo.Echo {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	e.Use(session.Middleware(h.SeesionStore))
-	e.Use(middleware.CORS())
+	// localhost:3000とcomiq.kyosutech.comでアクセスできるようにする
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"http://localhost:3000", "https://comiq.kyosutech.com"},
+		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+	}))
 
 	api := e.Group("/v1")
 	api.GET("/", h.Health)

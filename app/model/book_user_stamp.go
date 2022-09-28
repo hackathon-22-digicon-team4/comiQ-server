@@ -18,7 +18,7 @@ type BookUserStamp struct {
 }
 
 func (b BookUserStamp) BookPageImageURL(assetHost string) string {
-	return fmt.Sprintf("https://%s/book_seires/%s/books/%s/%d.jpeg", assetHost, b.BookSeriesID, b.BookID, b.PageNum)
+	return fmt.Sprintf("https://%s/book_series/%s/books/%s/%d.jpeg", assetHost, b.BookSeriesID, b.BookID, b.PageNum)
 }
 
 func NewBookUserStamp(bookID, bookSeriesID string, pageNum, x, y int, userID, stampID string) BookUserStamp {

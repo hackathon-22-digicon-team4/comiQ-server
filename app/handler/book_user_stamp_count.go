@@ -12,10 +12,10 @@ type GetBookUserStampCountsResponse struct {
 }
 
 type BookUserStampCount struct {
-	StampID string `json:"stampId,omitempty"`
-	StampName string `json:"stampName,omitempty"`
+	StampID       string `json:"stampId,omitempty"`
+	StampName     string `json:"stampName,omitempty"`
 	StampImageURL string `json:"stampImageUrl,omitempty"`
-	Count int `json:"count,omitempty"`
+	Count         int    `json:"count,omitempty"`
 }
 
 // bookIdとbookSeiresIdをクエリパラメータとして受け取る
@@ -49,10 +49,10 @@ func (h *Handlers) GetBookUserStampCounts(c echo.Context) error {
 	bookUserStampCounts := make([]BookUserStampCount, 0)
 	for _, stamp := range stamps {
 		bookUserStampCounts = append(bookUserStampCounts, BookUserStampCount{
-			StampID: stamp.ID,
-			StampName: stamp.Name,
+			StampID:       stamp.ID,
+			StampName:     stamp.Name,
 			StampImageURL: stamp.ImageURL(h.AssetHost),
-			Count: stampCountMap[stamp.ID],
+			Count:         stampCountMap[stamp.ID],
 		})
 	}
 	// BookUserStampCountsをCountが多い順にソートする

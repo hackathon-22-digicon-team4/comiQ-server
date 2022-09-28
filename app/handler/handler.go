@@ -30,9 +30,9 @@ func (h *Handlers) NewServer() *echo.Echo {
 	e.Use(session.Middleware(h.SeesionStore))
 	// localhost:3000とcomiq.kyosutech.comでアクセスできるようにする
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins: []string{"http://localhost:3000", "https://comiq.kyosutech.com"},
-		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
-		AllowMethods: []string{echo.GET, echo.PUT, echo.POST, echo.DELETE},
+		AllowOrigins:     []string{"http://localhost:3000", "https://comiq.kyosutech.com"},
+		AllowHeaders:     []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+		AllowMethods:     []string{echo.GET, echo.PUT, echo.POST, echo.DELETE},
 		AllowCredentials: true,
 	}))
 

@@ -30,9 +30,9 @@ func (h *Handlers) NewServer() *echo.Echo {
 	e.Use(session.Middleware(h.SeesionStore))
 	// localhost:3000とcomiq.kyosutech.comでアクセスできるようにする
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins: []string{"http://localhost:3000", "https://comiq.kyosutech.com"},
-		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
-		AllowMethods: []string{echo.GET, echo.PUT, echo.POST, echo.DELETE},
+		AllowOrigins:     []string{"http://localhost:3000", "https://comiq.kyosutech.com"},
+		AllowHeaders:     []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+		AllowMethods:     []string{echo.GET, echo.PUT, echo.POST, echo.DELETE},
 		AllowCredentials: true,
 	}))
 
@@ -58,8 +58,11 @@ func (h *Handlers) NewServer() *echo.Echo {
 	apiStamps.GET("", h.GetStamps)
 
 	apiBookUserStamp := api.Group("/book_user_stamps")
-	apiBookUserStamp.GET("", h.GetBookUserStamps)
+	apiBookUserStamp.GET("", h.GetBookUserStamps, echoutil.CheckLogin)
 	apiBookUserStamp.POST("", h.PostBookUserStamps, echoutil.CheckLogin)
 	apiBookUserStamp.DELETE("/:id", h.DeleteBookUserStamp, echoutil.CheckLogin)
+
+	apiBookUserStampCount := api.Group("/book_user_stamp_counts")
+	apiBookUserStampCount.GET("", h.GetBookUserStampCounts)
 	return e
 }

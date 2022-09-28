@@ -40,4 +40,14 @@ VALUES
         44,
         'user2',
         'a5de88ed-f4fc-44ab-b69c-9d2ec097cb49'
+    ),
+    (
+        '545624ad-2556-470b-9b86-83b19eed1f4d',
+        'c6ee816d-8c19-457c-9855-ffe53df488ea',
+        '5fbf13cf-d4ec-45b6-91ae-41ef9fc0faf6',
+        1,
+        20,
+        44,
+        'user2',
+        '34d73480-8115-422e-8bf3-651279a9d876'
     );

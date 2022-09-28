@@ -8,4 +8,5 @@ import (
 
 type StampRepository interface {
 	FindAllStamps(ctx context.Context) ([]model.Stamp, error)
+	FindStampsByIDs(ctx context.Context, IDs []string) ([]model.Stamp, error)
 }

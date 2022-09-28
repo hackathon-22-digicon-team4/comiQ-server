@@ -58,8 +58,11 @@ func (h *Handlers) NewServer() *echo.Echo {
 	apiStamps.GET("", h.GetStamps)
 
 	apiBookUserStamp := api.Group("/book_user_stamps")
-	apiBookUserStamp.GET("", h.GetBookUserStamps)
+	apiBookUserStamp.GET("", h.GetBookUserStamps, echoutil.CheckLogin)
 	apiBookUserStamp.POST("", h.PostBookUserStamps, echoutil.CheckLogin)
 	apiBookUserStamp.DELETE("/:id", h.DeleteBookUserStamp, echoutil.CheckLogin)
+
+	apiBookUserStampCount := api.Group("/book_user_stamp_counts")
+	apiBookUserStampCount.GET("", h.GetBookUserStampCounts)
 	return e
 }
